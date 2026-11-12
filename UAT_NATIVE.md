@@ -1,0 +1,25 @@
+# Checklist UAT Generator PO Native Beta
+
+- [ ] APK dapat diinstal dan dibuka di Android 8+ tanpa crash.
+- [ ] Kelima layar benar-benar komponen native (tanpa WebView).
+- [ ] Input stok 8 supplier dan BPA dua gudang; stok tersimpan setelah aplikasi ditutup.
+- [ ] Paste tepat satu kolom 29 qty; semua nilai 0 tetap disimpan.
+- [ ] Konversi Dada/Fillet: 100 PCS = 10 Pack; Ayam Utuh tetap ekor.
+- [ ] Pembulatan 100 PCS Yamiku Dada → 0 Pack; 380 PCS → 50 Pack.
+- [ ] Pembulatan 100 PCS Japfa Dada → 20 Pack; 260 PCS BPA Fillet → 20 Pack.
+- [ ] Rincian pembulatan + dan - per outlet akurat dan terpisah dari Pending stok.
+- [ ] Stok BPA Bandung tak dipakai outlet Jakarta dan sebaliknya.
+- [ ] Pembatasan supplier OFF tidak memengaruhi alokasi; ON menolak outlet yang dibatasi.
+- [ ] Catatan otomatis Yamiku/BSD Request 00; lainnya No Lunch; pengecualian menimpa.
+- [ ] Noted header sesuai supplier+SKU.
+- [ ] Harga SKU dan subtotal rupiah sesuai master.
+- [ ] Outlet tabel A–Z, tanpa baris header No/Outlet/Qty/Catatan.
+- [ ] Cetak PDF A4 Landscape: hanya 1 supplier per halaman, 4 tabel maksimal, 2 kolom × 2 baris.
+- [ ] Google Sign-In meminta scope Sheets Read-Only dan tidak meminta edit.
+- [ ] Tanggal RO–PPIC dibaca dari grup pink; kolom kuning tidak dibaca.
+- [ ] Preview 29 outlet × 3 SKU, cek tiga outlet dan tanggal kirim.
+- [ ] Koneksi gagal / nilai kosong tak mengubah kebutuhan yang lama.
+- [ ] Setelah impor, rollback memulihkan state sebelumnya.
+- [ ] Backup JSON, Restore JSON, Reset Data Input, mempertahankan Master.
+- [ ] Setelah Android ditutup dan dibuka ulang, data tersimpan.
+- [ ] APK update dengan keystore sama menjaga data (backup JSON tetap wajib).

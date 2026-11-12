@@ -1,0 +1,30 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'com.rekaciptaselera.generatorpo'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.rekaciptaselera.generatorponative'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '1.0-native-beta'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    // Optional stable signing for Google OAuth SHA-1 and APK upgrades on GitHub Actions.
+    if (System.getenv('SIGNING_KEYSTORE_PATH')) {
+        signingConfigs {
+            internalBeta {
+                storeFile file(System.getenv('SIGNING_KEYSTORE_PATH'))
+                storePassword System.getenv('SIGNING_STORE_PASSWORD')
+                keyAlias System.getenv('SIGNING_KEY_ALIAS')
+                keyPassword System.getenv('SIGNING_KEY_PASSWORD')
+            }
+        }
+        buildTypes { debug { signingConfig signingConfigs.internalBeta } }
+    }
+    buildTypes { release { minifyEnabled false } }
+}
+dependencies { implementation 'com.google.android.gms:play-services-auth:21.6.0' }
