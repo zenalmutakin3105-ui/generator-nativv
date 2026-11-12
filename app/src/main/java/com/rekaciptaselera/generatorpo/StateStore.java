@@ -16,7 +16,7 @@ public final class StateStore {
     public void snapshot(PoRules.State state)throws Exception{write(rollbackFile,serialize(state).toString());}
     public boolean hasRollback(){return rollbackFile.exists();}
     public PoRules.State rollback()throws Exception{if(!hasRollback())throw new IOException("Snapshot rollback belum tersedia.");PoRules.State s=parse(new JSONObject(read(rollbackFile)));save(s);return s;}
-    public String export(PoRules.State s) {
+     public String export(PoRules.State s) {     JSONObject x = serialize(s);      try {         x.put("format", "GeneratorPO-Native-v1");         x.put("exportedAt", new Date().toString());         return x.toString(2);     } catch (org.json.JSONException e) {         return x.toString();     } } {
         JSONObject x = serialize(s);
         try {
             x.put("format", "GeneratorPO-Native-v1");
