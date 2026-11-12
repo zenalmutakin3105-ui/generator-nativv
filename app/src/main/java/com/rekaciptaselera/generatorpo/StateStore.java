@@ -16,7 +16,16 @@ public final class StateStore {
     public void snapshot(PoRules.State state)throws Exception{write(rollbackFile,serialize(state).toString());}
     public boolean hasRollback(){return rollbackFile.exists();}
     public PoRules.State rollback()throws Exception{if(!hasRollback())throw new IOException("Snapshot rollback belum tersedia.");PoRules.State s=parse(new JSONObject(read(rollbackFile)));save(s);return s;}
-    public String export(PoRules.State s){JSONObject x=serialize(s);try{x.put("format","GeneratorPO-Native-v1");x.put("exportedAt",new Date().toString());}catch(Exception ignored){}return x.toString(2);}
+    public String export(PoRules.State s) {
+        JSONObject x = serialize(s);
+        try {
+            x.put("format", "GeneratorPO-Native-v1");
+            x.put("exportedAt", new Date().toString());
+            return x.toString(2);
+        } catch (org.json.JSONException e) {
+            return x.toString();
+        }
+    }
     public PoRules.State importBackup(String json)throws Exception{JSONObject root=new JSONObject(json);PoRules.State s=parse(root.has("state")?root.getJSONObject("state"):root);save(s);return s;}
     private static String read(File f)throws Exception{try(FileInputStream in=new FileInputStream(f)){ByteArrayOutputStream b=new ByteArrayOutputStream();byte[] buf=new byte[8192];int n;while((n=in.read(buf))>=0)b.write(buf,0,n);return b.toString(StandardCharsets.UTF_8.name());}}
     private static void write(File file,String value)throws Exception{File tmp=new File(file.getParentFile(),file.getName()+".tmp");try(FileOutputStream out=new FileOutputStream(tmp)){out.write(value.getBytes(StandardCharsets.UTF_8));out.getFD().sync();}if(file.exists()&&!file.delete())throw new IOException("Tidak dapat memperbarui data lama");if(!tmp.renameTo(file))throw new IOException("Gagal menyimpan data lokal");}
